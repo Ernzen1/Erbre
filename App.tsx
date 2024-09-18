@@ -91,6 +91,12 @@ function App(): React.JSX.Element {
           component={StockPage}
           options={{
             headerShown: true,
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#0D0D0D",
+            }            
           }}
         />
       </Stack.Navigator>
