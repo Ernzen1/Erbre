@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   FlatList,
-  Modal,
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
-  useColorScheme,
   View,
 } from 'react-native';
 
@@ -21,7 +16,7 @@ import ReactNativeModal from 'react-native-modal';
 
 function StockPage(): React.JSX.Element {
 
-  const [products, setProducts] = useState<{id: number, name: string}[]>([]);
+  const [products, setProducts] = useState<{id: number, name: string, description: string}[]>([]);
   const [showProductModal, setShowProductModal] = useState(false);
 
   return (
@@ -38,7 +33,7 @@ function StockPage(): React.JSX.Element {
               data={products}
               showsVerticalScrollIndicator={false}
               renderItem={
-                (product) => <ProductComponent name={product.item.name}/>
+                (product) => <ProductComponent name={product.item.name} description={product.item.description}/>
               }
             />
           :
@@ -51,15 +46,6 @@ function StockPage(): React.JSX.Element {
         style={styles.addButton}
         onPress={() => {
           setShowProductModal(true);
-          // setProducts(
-          //   [
-          //     ...products,
-          //     {
-          //       id: products.length - 1,
-          //       name: "teste " + products.length,
-          //     }
-          //   ]
-          // );
         }}
       >
         <Icon
@@ -72,7 +58,19 @@ function StockPage(): React.JSX.Element {
         onBackdropPress={() => setShowProductModal(false)}
       >
         <ProductModalBody
-
+          newProductCallback={(name: string, description: string,) => {
+              setProducts(
+              [
+                ...products,
+                {
+                  id: products.length - 1,
+                  name: name,
+                  description: description,
+                }
+              ]
+            );
+            setShowProductModal(false);
+          }}
         />
       </ReactNativeModal>
     </SafeAreaView>

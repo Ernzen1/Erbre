@@ -1,21 +1,17 @@
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React, { useState } from 'react';
 import {
-  FlatList,
-  Modal,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  useColorScheme,
   View,
 } from 'react-native';
 
 
 function ProductModalBody(props: any): React.JSX.Element {
+
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
   return (
     <View style={{
         width: "80%",
@@ -34,6 +30,10 @@ function ProductModalBody(props: any): React.JSX.Element {
           Nome
         </Text>
         <TextInput
+          value={name}
+          onChangeText={(text) => {
+            setName(text);
+          }}
           style={{
             width: "80%",
             height: 50,
@@ -52,6 +52,10 @@ function ProductModalBody(props: any): React.JSX.Element {
           Descrição
         </Text>
         <TextInput
+          value={description}
+          onChangeText={(text) => {
+            setDescription(text);
+          }}
           style={{
             width: "80%",
             height: 50,
@@ -61,16 +65,23 @@ function ProductModalBody(props: any): React.JSX.Element {
           }}
         />
       </View>
-      <TouchableOpacity style={{
-        width: "80%",
-        height: 50,
-        backgroundColor: "lightgray",
-        borderRadius: 15,
-        justifyContent: "center",
-        alignItems: "center",
-      }}>
+      <TouchableOpacity
+        onPress={() => {
+          if (props.newProductCallback) {
+            props.newProductCallback(name, description);
+          }
+        }}
+        style={{
+          width: "80%",
+          height: 50,
+          backgroundColor: "green",
+          borderRadius: 15,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Text style={{
-          color: "black",
+          color: "white",
           fontSize: 18,
         }}>
           Cadastrar produto
