@@ -31,6 +31,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import LoginScreen from './src/modules/login/login_screen';
+import SalesScreen from './src/modules/sales/sales_screen';
 
 declare global {
  namespace ReactNavigation {
@@ -86,6 +88,7 @@ function App(): React.JSX.Element {
         }}
       >
         <Stack.Screen name="splashcreen" component={Splashscreen}/>
+        <Stack.Screen name="Login" component={LoginScreen}/>
         <Stack.Screen
           name="Estoque"
           component={StockPage}
@@ -96,7 +99,21 @@ function App(): React.JSX.Element {
             },
             headerStyle: {
               backgroundColor: "#0D0D0D",
-            }            
+            }
+          }}
+        />
+        <Stack.Screen
+          name="Vendas"
+          component={SalesScreen}
+          options={{
+            headerShown: true,
+            headerBackVisible: false,
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#0D0D0D",
+            }
           }}
         />
       </Stack.Navigator>

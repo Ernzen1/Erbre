@@ -16,11 +16,11 @@ import { useNavigation } from '@react-navigation/core';
 
 
 type RootStackParamList = {
-    Estoque: undefined;
+    Login: undefined;
     Details: { itemId: number; otherParam: string };
   };
   
-type StockScreenNavigationProp = StackNavigationProp<RootStackParamList, "Estoque">;
+type StockScreenNavigationProp = StackNavigationProp<RootStackParamList, "Login">;
 
 const Splashscreen = (): React.JSX.Element => {
 
@@ -28,7 +28,7 @@ const Splashscreen = (): React.JSX.Element => {
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.replace("Estoque");
+            navigation.replace("Login");
         }, 1500);
     }, []);
 

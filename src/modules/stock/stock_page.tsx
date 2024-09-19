@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ProductComponent from './product_component';
 import ProductModalBody from './product_modal';
 import ReactNativeModal from 'react-native-modal';
+import NavigationBar from '../navigation_bar/navigation_bar';
 
 
 function StockPage(): React.JSX.Element {
@@ -53,6 +54,7 @@ function StockPage(): React.JSX.Element {
           style={styles.buttonIcon}
         />
       </TouchableOpacity>
+      <NavigationBar/>
       <ReactNativeModal
         isVisible={showProductModal}
         onBackdropPress={() => setShowProductModal(false)}
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
     borderRadius: 40,
     right: 10,
-    bottom: 10,
+    bottom: 60,
   },
   mainTitle: {
       color: "white",
