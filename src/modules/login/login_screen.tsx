@@ -1,5 +1,5 @@
 import LottieView from 'lottie-react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -24,7 +24,7 @@ type RootStackParamList = {
   
 type StockScreenNavigationProp = StackNavigationProp<RootStackParamList, "Stock">;
 
-const LoginScreen = () : React.JSX.Element => {
+const LoginScreen = (props: any) : React.JSX.Element => {
 
     const navigation = useNavigation<StockScreenNavigationProp>();
 
@@ -44,19 +44,27 @@ const LoginScreen = () : React.JSX.Element => {
                 Login
             </Text>
 
-            <TextInput style={{
-                width: "70%",
-                height: 50,
-                backgroundColor: "white",
-                borderRadius: 15,
-            }}/>
+            <TextInput
+                placeholder="Email"
+                placeholderTextColor="black"
+                style={{
+                    width: "70%",
+                    height: 50,
+                    backgroundColor: "white",
+                    borderRadius: 15,
+                }}
+            />
 
-            <TextInput style={{
-                width: "70%",
-                height: 50,
-                backgroundColor: "white",
-                borderRadius: 15,
-            }}/>
+            <TextInput
+                placeholder="Senha"
+                placeholderTextColor="black"
+                style={{
+                    width: "70%",
+                    height: 50,
+                    backgroundColor: "white",
+                    borderRadius: 15,
+                }}
+            />
 
             <View style={{
                 width: "100%",
@@ -85,14 +93,19 @@ const LoginScreen = () : React.JSX.Element => {
                     </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{
-                    width: "70%",
-                    height: 40,
-                    backgroundColor: "gray",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: 10,
-                }}>
+                <TouchableOpacity
+                    onPress={() => {
+                        props.showRegister();
+                    }}
+                    style={{
+                        width: "70%",
+                        height: 40,
+                        backgroundColor: "gray",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: 10,
+                    }}
+                >
                     <Text style={{
                         color: "white",
                         fontSize: 18,
@@ -105,22 +118,112 @@ const LoginScreen = () : React.JSX.Element => {
     );
 }
 
-const RegisterScreen = () : React.JSX.Element => {
+const RegisterScreen = (props: any) : React.JSX.Element => {
     return (
         <View style={{
             width: "80%",
-            height: 350,
+            height: 400,
             backgroundColor: "rgba(10, 10, 10, 1)",
             borderRadius: 25,
+            justifyContent: "space-evenly",
+            alignItems: "center",
         }}>
-            <Text>
-                
+            <Text style={{
+                color: "white",
+                fontSize: 24,
+            }}>
+                Cadastro
             </Text>
+
+            <TextInput
+                placeholder="Email"
+                placeholderTextColor="black"
+                style={{
+                    width: "70%",
+                    height: 50,
+                    backgroundColor: "white",
+                    borderRadius: 15,
+                }}
+            />
+
+            <TextInput
+                placeholder="Senha"
+                placeholderTextColor="black"
+                style={{
+                    width: "70%",
+                    height: 50,
+                    backgroundColor: "white",
+                    borderRadius: 15,
+                }}
+            />
+
+            <TextInput
+                placeholder="Confirmar senha"
+                placeholderTextColor="black"
+                style={{
+                    width: "70%",
+                    height: 50,
+                    backgroundColor: "white",
+                    borderRadius: 15,
+                }}
+            />
+
+            <View style={{
+                width: "100%",
+                height: 90,
+                justifyContent: "space-between",
+                alignItems: "center",
+            }}>
+                <TouchableOpacity
+                    onPress={() => {
+                        
+                    }}
+                    style={{
+                        width: "70%",
+                        height: 40,
+                        backgroundColor: "green",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: 10,
+                    }}
+                >
+                    <Text style={{
+                        color: "white",
+                        fontSize: 18,
+                    }}>
+                        Criar conta
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => {
+                        props.showLogin();
+                    }}
+                    style={{
+                        width: "70%",
+                        height: 40,
+                        backgroundColor: "gray",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: 10,
+                    }}
+                >
+                    <Text style={{
+                        color: "white",
+                        fontSize: 18,
+                    }}>
+                        Voltar ao login
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
 
 const AuthenticationScreen = (): React.JSX.Element => {
+
+    const [option, setOption] = useState("login");
+
     return (
         <SafeAreaView style={{
             flex: 1,
@@ -128,7 +231,12 @@ const AuthenticationScreen = (): React.JSX.Element => {
             justifyContent: "center",
             alignItems: "center",
         }}>
-            <LoginScreen/>
+            {
+                option == "register" ?
+                <RegisterScreen showLogin={() => {setOption("login");}}/>
+                :
+                <LoginScreen showRegister={() => {setOption("register");}}/>
+            }
         </SafeAreaView>
     );
 }
