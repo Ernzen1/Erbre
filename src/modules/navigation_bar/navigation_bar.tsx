@@ -10,18 +10,18 @@ import { useNavigation } from '@react-navigation/core';
 
 
 type StockStackParamList = {
-    Stock: undefined;
+    Estoque: undefined;
     Details: { itemId: number; otherParam: string };
 };
 
 type ProfileStackParamList = {
-    Profile: undefined;
+    Perfil: undefined;
     Details: { itemId: number; otherParam: string };
 };
   
-type StockNavigationProp = StackNavigationProp<StockStackParamList, "Stock">;
+type StockNavigationProp = StackNavigationProp<StockStackParamList, "Estoque">;
 
-type ProfileNavigationProp = StackNavigationProp<ProfileStackParamList, "Profile">;
+type ProfileNavigationProp = StackNavigationProp<ProfileStackParamList, "Perfil">;
 
 const NavigationBar = (): React.JSX.Element => {
 
@@ -40,7 +40,7 @@ const NavigationBar = (): React.JSX.Element => {
         }}>
             <TouchableOpacity
                 onPress={() => {
-                    stockNavigation.navigate("Stock");
+                    stockNavigation.navigate("Estoque");
                 }}
                 style={{
                     width: "50%",
@@ -56,7 +56,7 @@ const NavigationBar = (): React.JSX.Element => {
 
             <TouchableOpacity
                 onPress={() => {
-                    profileNavigation.navigate("Profile");
+                    profileNavigation.navigate("Perfil");
                 }}
                 style={{
                     width: "50%",

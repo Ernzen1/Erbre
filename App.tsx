@@ -90,7 +90,7 @@ function App(): React.JSX.Element {
         <Stack.Screen name="splashcreen" component={Splashscreen}/>
         <Stack.Screen name="Login" component={AuthenticationScreen}/>
         <Stack.Screen
-          name="Stock"
+          name="Estoque"
           component={StockPage}
           options={{
             headerShown: true,
@@ -104,7 +104,7 @@ function App(): React.JSX.Element {
           }}
         />
         <Stack.Screen
-          name="Profile"
+          name="Perfil"
           component={ProfileScreen}
           options={{
             headerShown: true,

@@ -36,13 +36,14 @@ function ProductComponent(props: any): React.JSX.Element {
             </View>
             
             <View style={{
+                flex: 1,
                 justifyContent: "space-between",
                 alignItems: "center",
             }}>
                 <TouchableOpacity style={{
                     width: 30,
                     height: 30,
-                    backgroundColor: "green",
+                    backgroundColor: "blue",
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: 35,
@@ -59,32 +60,22 @@ function ProductComponent(props: any): React.JSX.Element {
                 }}>
                     <Icon name="delete" color={"white"} size={18}/>
                 </TouchableOpacity>
-                <View style={{
-                    height: 50,
+                <TouchableOpacity style={{
+                    width: 80,
+                    height: 40,
                     flexDirection: "row",
+                    backgroundColor: "green",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 10,
                 }}>
-                    <TouchableOpacity style={{
-                        width: 30,
-                        height: 50,
-                        backgroundColor: "green",
-                        justifyContent: "center",
-                        alignItems: "center",
+                    <Text style={{
+                        color: "white",
+                        fontSize: 18,
                     }}>
-                        <Icon name="remove" color={"white"} size={18}/>
-                    </TouchableOpacity>
-
-                    <TextInput style={{width: 30}}/>
-
-                    <TouchableOpacity style={{
-                        width: 30,
-                        height: 50,
-                        backgroundColor: "green",
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}>
-                        <Icon name="add" color={"white"} size={18}/>
-                    </TouchableOpacity>
-                </View>
+                        Vender
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
 

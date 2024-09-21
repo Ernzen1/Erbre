@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 function ProductModalBody(props: any): React.JSX.Element {
@@ -22,6 +23,22 @@ function ProductModalBody(props: any): React.JSX.Element {
         justifyContent: "space-evenly",
         alignItems: "center",
     }}>
+
+      <TouchableOpacity style={{
+        height: "30%",
+        aspectRatio: 1,
+        backgroundColor: "lightgray",
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center",
+      }}>
+        <Icon
+          name="photo"
+          color="black"
+          size={32}
+        />
+      </TouchableOpacity>
+
       <View style={{
         width: "100%",
         alignItems: "center",

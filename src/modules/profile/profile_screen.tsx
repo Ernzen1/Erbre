@@ -11,7 +11,7 @@ import NavigationBar from '../navigation_bar/navigation_bar';
 
 
 type StockParamList = {
-    Stock: undefined;
+    Estoque: undefined;
     Details: { itemId: number; otherParam: string };
 };
 
@@ -20,7 +20,7 @@ type LoginParamList = {
     Details: { itemId: number; otherParam: string };
 };
   
-type StockScreenNavigationProp = StackNavigationProp<StockParamList, "Stock">;
+type StockScreenNavigationProp = StackNavigationProp<StockParamList, "Estoque">;
 
 type LoginScreenNavigationProp = StackNavigationProp<LoginParamList, "Login">;
 
