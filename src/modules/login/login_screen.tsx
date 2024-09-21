@@ -7,6 +7,8 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -16,22 +18,109 @@ import { useNavigation } from '@react-navigation/core';
 
 
 type RootStackParamList = {
-    Estoque: undefined;
+    Stock: undefined;
     Details: { itemId: number; otherParam: string };
-  };
+};
   
-type StockScreenNavigationProp = StackNavigationProp<RootStackParamList, "Estoque">;
+type StockScreenNavigationProp = StackNavigationProp<RootStackParamList, "Stock">;
 
-const LoginScreen = (): React.JSX.Element => {
+const LoginScreen = () : React.JSX.Element => {
 
     const navigation = useNavigation<StockScreenNavigationProp>();
 
-    useEffect(() => {
-        setTimeout(() => {
-            navigation.replace("Estoque");
-        }, 1500);
-    }, []);
+    return (
+        <View style={{
+            width: "80%",
+            height: 350,
+            backgroundColor: "rgba(10, 10, 10, 1)",
+            borderRadius: 25,
+            justifyContent: "space-evenly",
+            alignItems: "center",
+        }}>
+            <Text style={{
+                color: "white",
+                fontSize: 24,
+            }}>
+                Login
+            </Text>
 
+            <TextInput style={{
+                width: "70%",
+                height: 50,
+                backgroundColor: "white",
+                borderRadius: 15,
+            }}/>
+
+            <TextInput style={{
+                width: "70%",
+                height: 50,
+                backgroundColor: "white",
+                borderRadius: 15,
+            }}/>
+
+            <View style={{
+                width: "100%",
+                height: 90,
+                justifyContent: "space-between",
+                alignItems: "center",
+            }}>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.replace("Stock");
+                    }}
+                    style={{
+                        width: "70%",
+                        height: 40,
+                        backgroundColor: "green",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: 10,
+                    }}
+                >
+                    <Text style={{
+                        color: "white",
+                        fontSize: 18,
+                    }}>
+                        Logar
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{
+                    width: "70%",
+                    height: 40,
+                    backgroundColor: "gray",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 10,
+                }}>
+                    <Text style={{
+                        color: "white",
+                        fontSize: 18,
+                    }}>
+                        Cadastrar-se
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
+}
+
+const RegisterScreen = () : React.JSX.Element => {
+    return (
+        <View style={{
+            width: "80%",
+            height: 350,
+            backgroundColor: "rgba(10, 10, 10, 1)",
+            borderRadius: 25,
+        }}>
+            <Text>
+                
+            </Text>
+        </View>
+    );
+}
+
+const AuthenticationScreen = (): React.JSX.Element => {
     return (
         <SafeAreaView style={{
             flex: 1,
@@ -39,16 +128,9 @@ const LoginScreen = (): React.JSX.Element => {
             justifyContent: "center",
             alignItems: "center",
         }}>
-            <View style={{
-                width: "80%",
-                height: "60%",
-                backgroundColor: "lightgray",
-                borderRadius: 25,
-            }}>
-                
-            </View>
+            <LoginScreen/>
         </SafeAreaView>
     );
 }
 
-export default LoginScreen;
+export default AuthenticationScreen;

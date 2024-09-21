@@ -10,24 +10,24 @@ import { useNavigation } from '@react-navigation/core';
 
 
 type StockStackParamList = {
-    Estoque: undefined;
+    Stock: undefined;
     Details: { itemId: number; otherParam: string };
 };
 
-type SalesStackParamList = {
-    Vendas: undefined;
+type ProfileStackParamList = {
+    Profile: undefined;
     Details: { itemId: number; otherParam: string };
 };
   
-type StockNavigationProp = StackNavigationProp<StockStackParamList, "Estoque">;
+type StockNavigationProp = StackNavigationProp<StockStackParamList, "Stock">;
 
-type SalesNavigationProp = StackNavigationProp<SalesStackParamList, "Vendas">;
+type ProfileNavigationProp = StackNavigationProp<ProfileStackParamList, "Profile">;
 
 const NavigationBar = (): React.JSX.Element => {
 
     const stockNavigation = useNavigation<StockNavigationProp>();
 
-    const salesNavigation = useNavigation<SalesNavigationProp>();
+    const profileNavigation = useNavigation<ProfileNavigationProp>();
 
     return (
         <View style={{
@@ -40,7 +40,7 @@ const NavigationBar = (): React.JSX.Element => {
         }}>
             <TouchableOpacity
                 onPress={() => {
-                    stockNavigation.navigate("Estoque");
+                    stockNavigation.navigate("Stock");
                 }}
                 style={{
                     width: "50%",
@@ -56,7 +56,7 @@ const NavigationBar = (): React.JSX.Element => {
 
             <TouchableOpacity
                 onPress={() => {
-                    salesNavigation.navigate("Vendas");
+                    profileNavigation.navigate("Profile");
                 }}
                 style={{
                     width: "50%",
@@ -66,7 +66,7 @@ const NavigationBar = (): React.JSX.Element => {
                 }}
             >
                 <Text>
-                    Vendas
+                    Perfil
                 </Text>
             </TouchableOpacity>
         </View>
