@@ -49,7 +49,9 @@ const NavigationBar = (): React.JSX.Element => {
                     alignItems: "center",
                 }}
             >
-                <Text>
+                <Text style={{
+                    color: "white",
+                }}>
                     Estoque
                 </Text>
             </TouchableOpacity>
@@ -65,7 +67,9 @@ const NavigationBar = (): React.JSX.Element => {
                     alignItems: "center",
                 }}
             >
-                <Text>
+                <Text style={{
+                    color: "white",
+                }}>
                     Perfil
                 </Text>
             </TouchableOpacity>

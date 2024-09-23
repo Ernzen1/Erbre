@@ -66,14 +66,19 @@ function ProductComponent(props: any): React.JSX.Element {
                 justifyContent: "space-between",
                 alignItems: "center",
             }}>
-                <TouchableOpacity style={{
-                    width: 40,
-                    height: 40,
-                    backgroundColor: "blue",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: 10,
-                }}>
+                <TouchableOpacity
+                    onPress={() => {
+                        props.editCallback(props.name, props.description, props.value, props.image);
+                    }}
+                    style={{
+                        width: 40,
+                        height: 40,
+                        backgroundColor: "blue",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: 10,
+                    }}
+                >
                     <Icon name="edit" color={"white"} size={18}/>
                 </TouchableOpacity>
 

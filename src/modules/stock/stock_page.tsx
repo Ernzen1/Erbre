@@ -19,14 +19,17 @@ import { ImagePickerResponse } from 'react-native-image-picker';
 
 function StockPage(): React.JSX.Element {
 
-  const [products, setProducts] = useState<{
+  interface Product {
     id: number,
     name: string,
     description: string,
     value: string,
     image: ImagePickerResponse,
-  }[]>([]);
+  }
+
+  const [products, setProducts] = useState<Product[]>([]);
   const [showProductModal, setShowProductModal] = useState(false);
+  const [selectedProductData, setSelectedProductData] = useState({} as Product);
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -47,8 +50,15 @@ function StockPage(): React.JSX.Element {
                   description={product.item.description}
                   value={product.item.value}
                   image={product.item.image}
-                  editCallback={() => {
-                    
+                  editCallback={(name: string, description: string, value: string, image: ImagePickerResponse) => {
+                    setSelectedProductData({
+                      id: product.item.id,
+                      name: name,
+                      description: description,
+                      value: value,
+                      image: image,
+                    });
+                    setShowProductModal(true);
                   }}
                   deleteCallback={() => {
                     setProducts(
@@ -83,9 +93,15 @@ function StockPage(): React.JSX.Element {
       <NavigationBar/>
       <ReactNativeModal
         isVisible={showProductModal}
-        onBackdropPress={() => setShowProductModal(false)}
+        onModalHide={() => {
+          setSelectedProductData({} as Product);
+        }}
+        onBackdropPress={() => {
+          setShowProductModal(false);
+        }}
       >
         <ProductModalBody
+          selectedProductData={selectedProductData.id != undefined ? selectedProductData : undefined}
           newProductCallback={(name: string, description: string, value: string, image: ImagePickerResponse) => {
               setProducts(
               [
@@ -101,6 +117,20 @@ function StockPage(): React.JSX.Element {
             );
             setShowProductModal(false);
           }}
+          editProductCallback={(id: number, name: string, description: string, value: string, image: ImagePickerResponse) => {
+            setProducts(
+              products.map(product => {
+                return product.id != id ? product : {
+                  id: id,
+                  name: name,
+                  description: description,
+                  value: value,
+                  image: image,
+                };
+              })
+          );
+          setShowProductModal(false);
+        }}
         />
       </ReactNativeModal>
     </SafeAreaView>

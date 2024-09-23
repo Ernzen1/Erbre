@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Alert,
   Image,
@@ -18,6 +18,15 @@ function ProductModalBody(props: any): React.JSX.Element {
   const [value, setValue] = useState("");
 
   const [image, setImage] = useState('' as ImagePickerResponse);
+
+  useEffect(() => {
+    if (props.selectedProductData != undefined) {
+      setName(props.selectedProductData.name);
+      setDescription(props.selectedProductData.description);
+      setValue(props.selectedProductData.value);
+      setImage(props.selectedProductData.image);
+    }
+  }, []);
 
   return (
     <View style={{
@@ -50,7 +59,7 @@ function ProductModalBody(props: any): React.JSX.Element {
         }}
       >
         {
-          image.assets && image.assets[0].base64 ?
+          image && image.assets && image.assets[0].base64 ?
           <Image
             style={{
               height: "100%",
@@ -73,7 +82,9 @@ function ProductModalBody(props: any): React.JSX.Element {
         width: "100%",
         alignItems: "center",
       }}>
-        <Text>
+        <Text style={{
+          color: "white",
+        }}>
           Nome
         </Text>
         <TextInput
@@ -95,7 +106,9 @@ function ProductModalBody(props: any): React.JSX.Element {
         width: "100%",
         alignItems: "center",
       }}>
-        <Text>
+        <Text style={{
+          color: "white",
+        }}>
           Descrição
         </Text>
         <TextInput
@@ -117,14 +130,17 @@ function ProductModalBody(props: any): React.JSX.Element {
         width: "100%",
         alignItems: "center",
       }}>
-        <Text>
+        <Text style={{
+          color: "white",
+        }}>
           Valor
         </Text>
         <TextInput
-          value={description}
+          value={value}
           onChangeText={(text) => {
-            setDescription(text);
+            setValue(text);
           }}
+          keyboardType={"decimal-pad"}
           style={{
             width: "80%",
             height: 40,
@@ -137,8 +153,12 @@ function ProductModalBody(props: any): React.JSX.Element {
 
       <TouchableOpacity
         onPress={() => {
-          if (props.newProductCallback) {
-            props.newProductCallback(name, description, value, image);
+          if (props.selectedProductData != undefined) {
+            props.editProductCallback(props.selectedProductData.id, name, description, value, image);
+          } else {
+            if (props.newProductCallback) {
+              props.newProductCallback(name, description, value, image);
+            }
           }
         }}
         style={{
@@ -155,7 +175,7 @@ function ProductModalBody(props: any): React.JSX.Element {
           color: "white",
           fontSize: 18,
         }}>
-          Cadastrar produto
+          {props.selectedProductData != undefined ? "Confirmar alteração" : "Cadastrar produto"}
         </Text>
       </TouchableOpacity>
     </View>
