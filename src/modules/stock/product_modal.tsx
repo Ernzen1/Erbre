@@ -92,6 +92,8 @@ function ProductModalBody(props: any): React.JSX.Element {
           onChangeText={(text) => {
             setName(text);
           }}
+          placeholder='Camiseta azul'
+          placeholderTextColor={"gray"}
           style={{
             width: "80%",
             height: 40,
@@ -116,6 +118,8 @@ function ProductModalBody(props: any): React.JSX.Element {
           onChangeText={(text) => {
             setDescription(text);
           }}
+          placeholder='Tamanho GG, pouco usada'
+          placeholderTextColor={"gray"}
           style={{
             width: "80%",
             height: 40,
@@ -140,6 +144,8 @@ function ProductModalBody(props: any): React.JSX.Element {
           onChangeText={(text) => {
             setValue(text);
           }}
+          placeholder='R$ 50,00'
+          placeholderTextColor={"gray"}
           keyboardType={"decimal-pad"}
           style={{
             width: "80%",
