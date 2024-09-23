@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  PermissionsAndroid
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -13,11 +14,18 @@ import ProductComponent from './product_component';
 import ProductModalBody from './product_modal';
 import ReactNativeModal from 'react-native-modal';
 import NavigationBar from '../navigation_bar/navigation_bar';
+import { ImagePickerResponse } from 'react-native-image-picker';
 
 
 function StockPage(): React.JSX.Element {
 
-  const [products, setProducts] = useState<{id: number, name: string, description: string}[]>([]);
+  const [products, setProducts] = useState<{
+    id: number,
+    name: string,
+    description: string,
+    value: string,
+    image: ImagePickerResponse,
+  }[]>([]);
   const [showProductModal, setShowProductModal] = useState(false);
 
   return (
@@ -34,7 +42,25 @@ function StockPage(): React.JSX.Element {
               data={products}
               showsVerticalScrollIndicator={false}
               renderItem={
-                (product) => <ProductComponent name={product.item.name} description={product.item.description}/>
+                (product) => <ProductComponent
+                  name={product.item.name}
+                  description={product.item.description}
+                  value={product.item.value}
+                  image={product.item.image}
+                  editCallback={() => {
+                    
+                  }}
+                  deleteCallback={() => {
+                    setProducts(
+                      products.filter(item => item.id != product.item.id)
+                    );
+                  }}
+                  sellCallback={() => {
+                    setProducts(
+                      products.filter(item => item.id != product.item.id)
+                    );
+                  }}
+                />
               }
             />
           :
@@ -60,7 +86,7 @@ function StockPage(): React.JSX.Element {
         onBackdropPress={() => setShowProductModal(false)}
       >
         <ProductModalBody
-          newProductCallback={(name: string, description: string,) => {
+          newProductCallback={(name: string, description: string, value: string, image: ImagePickerResponse) => {
               setProducts(
               [
                 ...products,
@@ -68,6 +94,8 @@ function StockPage(): React.JSX.Element {
                   id: products.length - 1,
                   name: name,
                   description: description,
+                  value: value,
+                  image: image,
                 }
               ]
             );

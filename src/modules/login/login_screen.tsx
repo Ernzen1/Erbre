@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
     Alert,
+  PermissionsAndroid,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -31,6 +32,12 @@ const LoginScreen = (props: any) : React.JSX.Element => {
     const [password, setPassword] = useState("");
 
     const navigation = useNavigation<StockScreenNavigationProp>();
+
+    useEffect(() => {
+        PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.CAMERA,
+        );
+    }, []);
 
     return (
         <View style={{

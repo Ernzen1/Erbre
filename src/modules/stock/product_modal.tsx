@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import {
+  Alert,
+  Image,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { launchCamera, CameraOptions, ImagePickerResponse } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
@@ -12,31 +15,58 @@ function ProductModalBody(props: any): React.JSX.Element {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [value, setValue] = useState("");
+
+  const [image, setImage] = useState('' as ImagePickerResponse);
 
   return (
     <View style={{
         width: "80%",
-        height: "60%",
         alignSelf: "center",
         backgroundColor: "rgba(20, 20, 20, 1)",
         borderRadius: 15,
         justifyContent: "space-evenly",
         alignItems: "center",
+        paddingVertical: 20,
     }}>
 
-      <TouchableOpacity style={{
-        height: "30%",
-        aspectRatio: 1,
-        backgroundColor: "lightgray",
-        borderRadius: 10,
-        justifyContent: "center",
-        alignItems: "center",
-      }}>
-        <Icon
-          name="photo"
-          color="black"
-          size={32}
-        />
+      <TouchableOpacity
+        onPress={async () => {
+          launchCamera(
+            {
+              includeBase64: true,
+            } as CameraOptions,
+          ).then(result => {
+            setImage(result);
+          });
+        }}
+        style={{
+          height: "30%",
+          aspectRatio: 1,
+          backgroundColor: "lightgray",
+          borderRadius: 10,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {
+          image.assets && image.assets[0].base64 ?
+          <Image
+            style={{
+              height: "100%",
+              aspectRatio: 1,
+              backgroundColor: "green"
+            }}
+            source={{
+              uri: `data:image/jpeg;base64,${image.assets![0].base64}`,
+            }}/>
+          :
+          <Icon
+            name="photo"
+            color="black"
+            size={32}
+          />
+        }
       </TouchableOpacity>
 
       <View style={{
@@ -53,7 +83,7 @@ function ProductModalBody(props: any): React.JSX.Element {
           }}
           style={{
             width: "80%",
-            height: 50,
+            height: 40,
             backgroundColor: "lightgray",
             borderRadius: 15,
             color: "black",
@@ -75,17 +105,40 @@ function ProductModalBody(props: any): React.JSX.Element {
           }}
           style={{
             width: "80%",
-            height: 50,
+            height: 40,
             backgroundColor: "lightgray",
             borderRadius: 15,
             color: "black",
           }}
         />
       </View>
+
+      <View style={{
+        width: "100%",
+        alignItems: "center",
+      }}>
+        <Text>
+          Valor
+        </Text>
+        <TextInput
+          value={description}
+          onChangeText={(text) => {
+            setDescription(text);
+          }}
+          style={{
+            width: "80%",
+            height: 40,
+            backgroundColor: "lightgray",
+            borderRadius: 15,
+            color: "black",
+          }}
+        />
+      </View>
+
       <TouchableOpacity
         onPress={() => {
           if (props.newProductCallback) {
-            props.newProductCallback(name, description);
+            props.newProductCallback(name, description, value, image);
           }
         }}
         style={{
@@ -95,6 +148,7 @@ function ProductModalBody(props: any): React.JSX.Element {
           borderRadius: 15,
           justifyContent: "center",
           alignItems: "center",
+          marginTop: 10,
         }}
       >
         <Text style={{
